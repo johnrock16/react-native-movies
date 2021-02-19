@@ -1,41 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native';
-import { searchAPI } from '../ts/OMDBAPI';
-import { buildHandleChanger } from '../ts/util';
-
-
-const initialState = {
-  movieInfo: {}
-}
+import { MoviesContext } from '../context/MoviesContext';
 
 const MovieScreen = ({ route }) => {
-  const [state, setState] = useState(initialState);
-  // const stylesSA = useSafeAreaStyles();
+  const moviesContext= useContext(MoviesContext);
+  const {infoMovie,getInfoMovie} = moviesContext;
   const { imdbID } = route.params;
-  const { movieInfo } = state;
-  const onHandleChange = buildHandleChanger(initialState,setState);
 
   useEffect(() => {
-    searchAPI('', { i: imdbID }).then((search) => {
-      if (search?.result) onHandleChange.movieInfo(search.result);
-      else if(search?.error) alert(`${search.error}`)
-    });
+    getInfoMovie(imdbID);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: movieInfo.Poster }} />
+      <Image style={styles.image} source={{ uri: infoMovie.Poster }} />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{movieInfo.Title}</Text>
+        <Text style={styles.title}>{infoMovie.Title}</Text>
 
-        <Text style={styles.textPlot}>{movieInfo.Plot}</Text>
+        <Text style={styles.textPlot}>{infoMovie.Plot}</Text>
         {
-          (Object.keys(movieInfo).length > 0) && (
+          (Object.keys(infoMovie).length > 0) && (
             <FlatList
               data={Object.keys(MOVIE_INFOS)}
               keyExtractor={(item, index) => `movieInfo${item}${index}`}
               renderItem={({ item }) => (
-                <Text style={styles.textInfo}>{item}: {movieInfo[item]}</Text>
+                <Text style={styles.textInfo}>{item}: {infoMovie[item]}</Text>
               )}
             />
           )

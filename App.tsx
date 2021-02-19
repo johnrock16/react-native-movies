@@ -6,6 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import MovieScreen from './src/screens/MovieScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { MoviesContext, MoviesContextProvider } from './src/context/MoviesContext';
 
 
 const Stack = createStackNavigator();
@@ -13,14 +14,16 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <View style={styles.container}>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <Stack.Navigator>
-            <Stack.Screen options={navigationHeaderStyle('SEARCH MOVIES')} name="Home" component={Home} />
-            <Stack.Screen options={navigationHeaderStyle('MOVIE INFO')} name="MovieScreen" component={MovieScreen} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <MoviesContextProvider>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <Stack.Navigator>
+              <Stack.Screen options={navigationHeaderStyle('SEARCH MOVIES')} name="Home" component={Home} />
+              <Stack.Screen options={navigationHeaderStyle('MOVIE INFO')} name="MovieScreen" component={MovieScreen} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </MoviesContextProvider>
     </View>
   );
 }

@@ -1,53 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import MovieCard from '../components/MovieCard';
-import useSafeAreaStyles from '../hooks/UseSafeAreaStyles';
-import { searchAPI } from '../ts/OMDBAPI';
-import { buildHandleChanger } from '../ts/util';
+import { MoviesContext } from '../context/MoviesContext';
 import { HomeProps, Movie } from '../types/types';
 
-const initialState = {
-  textSearch: '',
-  searches: [],
-}
-
 const Home: React.FC<HomeProps> = ({ navigation }) => {
-  const [state, setState] = useState(initialState);
-  const { textSearch, searches } = state;
-  const onHandleChange=buildHandleChanger(initialState,setState);
-
-  const verifySearch=(searchString:string, message:boolean)=>{
-    const canSearch= searchString.length>2;
-    if(message && !canSearch) alert('Type 3 letters at minimun');
-    return canSearch
-  }
-
-  const onHandleSearch = (message:boolean=true) => {
-    if(verifySearch(textSearch,message)){
-      searchAPI('', { s: textSearch}).then((search) => {
-        if (search?.result && search.result?.Search) {
-          onHandleChange.searches(search.result?.Search);
-        }
-        else if(search?.error) alert(`${search.error}`)
-      });
-    }
-  }
-  // useEffect(()=>{
-  //   onHandleSearch(false)
-  // },[textSearch])
+  const moviesContext= useContext(MoviesContext);
+  const {ListMovies,textSearch,searchMovies,onHandleChange} = moviesContext;
 
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        <TextInput placeholder={'Batman'} onSubmitEditing={onHandleSearch} onChangeText={onHandleChange.textSearch} style={styles.textInput} />
-        <TouchableOpacity onPress={onHandleSearch} style={styles.button}>
+        <TextInput value={textSearch} placeholder={'Batman'} onSubmitEditing={searchMovies} onChangeText={onHandleChange.textSearch} style={styles.textInput} />
+        <TouchableOpacity onPress={searchMovies} style={styles.button}>
           <Text style={styles.textButton}>Search</Text>
         </TouchableOpacity>
       </View>
       {
-        (searches.length > 0) && (
+        (ListMovies.length > 0) && (
           <FlatList
-            data={searches}
+            data={ListMovies}
             numColumns={2}
             keyExtractor={(item: Movie) => item.imdbID}
             renderItem={({ item }) => {
