@@ -1,17 +1,19 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+import { MovieCardImage, MovieCardTextContainer } from '../styled/components/MovieCardStyles';
+import { CardContainerStyled, TitleStyled, TextDescriptionStyled } from '../styled/styles';
 import { MovieCardProps } from '../types/types';
 
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: movie.Poster }} />
-      {<View style={styles.textContainer}>
-        <Text style={styles.title}>{movie.Title}</Text>
-        <Text style={styles.bottomText}>{movie.Year} - {movie.Type}</Text>
-      </View>}
-    </View>
+    <CardContainerStyled>
+      <MovieCardImage source={{ uri: movie.Poster }} />
+      <MovieCardTextContainer>
+        <TitleStyled>{movie.Title}</TitleStyled>
+        <TextDescriptionStyled>{movie.Year} - {movie.Type}</TextDescriptionStyled>
+      </MovieCardTextContainer>
+    </CardContainerStyled>
   )
 }
 
