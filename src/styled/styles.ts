@@ -43,3 +43,10 @@ export const TextDescriptionStyled=styled.Text`
     textAlign: center;
     textTransform: capitalize;
 `;
+
+export const LoadingContainer=styled.View`
+    flex: 1;
+    backgroundColor: #00000011;
+    justifyContent: center;
+    alignItems:center;
+`;

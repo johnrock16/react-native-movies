@@ -17,6 +17,8 @@ Before starts go to http://www.omdbapi.com/ and make a API_KEY, after you got on
 
 ## Usage
 
+To run the project I recommend use:
+
 ```bash
-npm start
+npm run web
 ```

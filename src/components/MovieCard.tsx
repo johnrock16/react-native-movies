@@ -25,4 +25,4 @@ const styles=StyleSheet.create({
   bottomText:{ fontSize: 14, textAlign: 'center', textTransform: 'capitalize' },
 })
 
-export default MovieCard;
+export default React.memo(MovieCard);
