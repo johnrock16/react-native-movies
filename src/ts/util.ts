@@ -31,7 +31,7 @@ export const resolveFetch= async(resolve:any,format:string='json')=>{
     }
     if(resolve?.status===404) return {status:resolve.status, error:'not Found'}
     if(resolve?.status>=500) return {status:resolve.status, error:'error on server'}
-    return {status:resolve.status, error:'error on resolve'}
+    return {status:(resolve?.status)?resolve.status:undefined, error:'error on resolve'}
 }
 
 /**
