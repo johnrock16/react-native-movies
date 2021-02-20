@@ -13,10 +13,10 @@ const MovieScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: infoMovie.Poster }} />
+    <Image style={styles.image} source={{ uri: infoMovie.Poster }} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>{infoMovie.Title}</Text>
-
+        <Text style={styles.textGenre}>{infoMovie.Genre}</Text>
         <Text style={styles.textPlot}>{infoMovie.Plot}</Text>
         {
           (Object.keys(infoMovie).length > 0) && (
@@ -36,13 +36,14 @@ const MovieScreen = ({ route }) => {
 
 const styles = StyleSheet.create({
   textInfo: {
-    fontSize: 14, textAlign: 'left', textTransform: 'capitalize', color: 'black'
+    fontSize: 14, textAlign: 'left', textTransform: 'capitalize', color: '#777'
   },
-  title: { fontSize: 18, textAlign: 'center', fontWeight: 'bold', color: 'black' },
-  container: { flex: 1 },
-  textContainer: { backgroundColor: 'white', flex: 1, padding: 20 },
-  image: { width: '100%',flexGrow: 1, flexBasis: 0 },
-  textPlot: { fontSize: 14, textTransform: 'capitalize', textAlign: 'center', padding: 10, color: 'black' }
+  title: { fontSize: 28, textAlign: 'center', fontWeight: 'bold', color: 'black' },
+  container: { flex: 1, backgroundColor:'#e9eaec' },
+  textContainer: { flex: 1, padding: 20 },
+  image: { width: '95%',alignSelf:'center',flexGrow: 1, flexBasis: 0, borderRadius:30 },
+  textPlot: { fontSize: 14, textTransform: 'capitalize', textAlign: 'center', padding: 10, color: '#aaa' },
+  textGenre: { fontSize: 14, textTransform: 'capitalize', textAlign: 'center', padding: 10,fontWeight:'bold', color: '#eac01c' }
 })
 const MOVIE_INFOS = {
   Type: 'Type',

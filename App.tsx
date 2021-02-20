@@ -19,7 +19,7 @@ export default function App() {
           <NavigationContainer>
             <Stack.Navigator>
               <Stack.Screen options={navigationHeaderStyle('SEARCH MOVIES')} name="Home" component={Home} />
-              <Stack.Screen options={navigationHeaderStyle('MOVIE INFO')} name="MovieScreen" component={MovieScreen} />
+              <Stack.Screen options={navigationHeaderStyle('')} name="MovieScreen" component={MovieScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </SafeAreaProvider>
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const navigationHeaderStyle=(title:string)=>({ title,headerStyle: {backgroundColor: 'black'},headerTintColor:'white' })
+const navigationHeaderStyle=(title:string)=>({ title,headerStyle: {backgroundColor: '#e9eaec'},headerTintColor:'#333652' })

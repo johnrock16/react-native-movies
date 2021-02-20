@@ -38,11 +38,11 @@ const Home: React.FC<HomeProps> = ({ navigation }) => {
 }
 
 const styles=StyleSheet.create({
-  container:{ flex: 1, backgroundColor: 'orange',padding:10 },
+  container:{ flex: 1, backgroundColor: '#e9eaec',padding:10 },
   topContainer: {width: '100%', justifyContent: 'center', flexDirection: 'row',padding:4 },
 
-  textInput:{ backgroundColor: 'white', borderWidth:2, minWidth: 200, minHeight: 40,padding:4 },
-  button:{ backgroundColor: 'black', justifyContent:'center',borderWidth:0.5,borderColor:'white' ,minWidth: 60, minHeight: 40 },
+  textInput:{ backgroundColor: 'white', borderWidth:2, borderColor:'#aaa' , fontSize:18, color:'#333652' ,minWidth: 200, minHeight: 40,padding:4 },
+  button:{ backgroundColor: '#333652', justifyContent:'center',borderWidth:0.5,borderColor:'#333652' ,minWidth: 60, minHeight: 40 },
   textButton:{color:'white',textAlign:'center'},
   buttonImage:{ flexGrow: 1, margin: 10, flexBasis: 0 },
 })
