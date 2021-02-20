@@ -36,6 +36,7 @@ export const TitleStyled=styled.Text`
     textAlign: center;
     fontWeight: bold;
     overflow: hidden;
+    height:50px;
 `;
 
 export const TextDescriptionStyled=styled.Text`

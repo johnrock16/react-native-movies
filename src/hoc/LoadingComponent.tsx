@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { LoadingContainer } from '../styled/styles';
 
 const LoadingComponent = ({ isLoading,children }) => {
