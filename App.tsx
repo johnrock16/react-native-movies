@@ -1,12 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './src/screens/Home';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import MovieScreen from './src/screens/MovieScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { MoviesContext, MoviesContextProvider } from './src/context/MoviesContext';
+import { MoviesContextProvider } from './src/context/MoviesContext';
+import MovieTabs from './src/navigation/tabs/MovieTabs';
+import { FavoriteMoviesContextProvider } from './src/context/FavoriteMoviesContext';
 
 
 const Stack = createStackNavigator();
@@ -15,14 +14,13 @@ export default function App() {
   return (
     <View style={styles.container}>
       <MoviesContextProvider>
-        <SafeAreaProvider>
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen options={navigationHeaderStyle('SEARCH MOVIES')} name="Home" component={Home} />
-              <Stack.Screen options={navigationHeaderStyle('')} name="MovieScreen" component={MovieScreen} />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </SafeAreaProvider>
+        <FavoriteMoviesContextProvider>
+          <SafeAreaProvider>
+            <NavigationContainer>
+              <MovieTabs/>
+            </NavigationContainer>
+          </SafeAreaProvider>
+        </FavoriteMoviesContextProvider>
       </MoviesContextProvider>
     </View>
   );

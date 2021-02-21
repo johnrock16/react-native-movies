@@ -1,12 +1,13 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { searchAPI } from '../ts/OMDBAPI';
 import { buildHandleChanger } from '../ts/util';
+import { Movie, onHandleMoviesContextType } from '../types/types';
 
 const defaultValue={
-  ListMovies:[],
-  infoMovie:[],
-  imdbID:'',
-  textSearch:'',
+  ListMovies:[] as [Movie] | [],
+  infoMovie:{} as Movie,
+  imdbID:'' as string,
+  textSearch:'' as string,
 }
 
 export const MoviesContext= createContext(defaultValue);
@@ -14,7 +15,7 @@ export const MoviesContext= createContext(defaultValue);
 export const MoviesContextProvider=({children})=>{
   const [state,setState] = useState(defaultValue);
   const {textSearch} = state;
-  const onHandleChange=buildHandleChanger(defaultValue,setState);
+  const onHandleChange=buildHandleChanger(defaultValue,setState) as onHandleMoviesContextType;
 
   const verifySearch=(searchString:string, message:boolean)=>{
     const canSearch= searchString.length>2;

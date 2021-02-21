@@ -12,10 +12,12 @@ export const TextInputStyled=styled.TextInput`
 `;
 
 export const ButtonStyled=styled.TouchableOpacity`
+    display:flex;
     background-color: #333652;
     justify-content:center;
     border-width:0.5px;
     border-color:#333652;
+    align-items:center;
     minWidth: 60px;
     minHeight: 40px;
 `;

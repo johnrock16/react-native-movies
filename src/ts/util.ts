@@ -1,3 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { and } from "react-native-reanimated";
+
 /**
  * A Simple function to make the method GET FETCH
  * @param url - url of the fetch
@@ -52,7 +55,7 @@ export const queryString =(params:any)=> Object.keys(params).map((key) => {
 export const buildHandleChanger=(initialState:object,setState:Function)=>{
     let object={};
     Object.keys(initialState).forEach((item)=>(object={...object,[item]:(v:any)=>setState((pv:object)=>({...pv,[item]:v}))}))
-    return object
+    return object;
 }
 /**
  * Create a simple HandleChange
@@ -63,4 +66,59 @@ export const buildHandleChanger=(initialState:object,setState:Function)=>{
  */
 export const handleChange=(key:string,value:any,setState:Function)=>{
     setState((pv:object)=>({...pv,[key]:value}))
+}
+
+export const addItemCache=async (key:string,value:any,filteredIndex='')=>{
+    const cacheData = await AsyncStorage.getItem(key) as string;
+    try {
+        let resultCache = JSON.parse(cacheData);
+        if(resultCache && Array.isArray(resultCache)){
+            if(filteredIndex!=''){
+                const result = resultCache.filter((item)=>{
+                    return(value[filteredIndex]===item[filteredIndex])
+                });
+                if(result.length>0){
+                    alert('you already have added this');
+                    return false;
+                }
+            }
+            resultCache.push(value);
+        }
+        else{
+            resultCache=[value];
+        }
+        AsyncStorage.setItem(key,JSON.stringify(resultCache));
+        return true;
+    } catch (error) {
+        console.log(error)
+    }
+    return false;
+}
+
+export const getItemCache=async(key:string,parsed=false)=>{
+    const cacheData= await AsyncStorage.getItem(key) as string; 
+    return (parsed)?JSON.parse(cacheData):cacheData;
+}
+
+export const removeItemCache=async(key:string,value,filteredIndex)=>{
+    const cacheData = await AsyncStorage.getItem(key) as string;
+    try{
+        const resultCache = JSON.parse(cacheData);
+        if(resultCache && Array.isArray(resultCache)){
+            let result=[];
+            if(filteredIndex){
+                result = resultCache.filter((item)=>{
+                    return(value[filteredIndex]!==item[filteredIndex])
+                });
+            }
+            else{
+                result=result.filter((item)=>value!==item);
+            }
+            AsyncStorage.setItem(key,JSON.stringify(result));
+            return true;
+        }
+    }catch(error){
+        console.log(error)
+    }
+    return false;
 }
