@@ -28,16 +28,10 @@ const MovieScreen = ({ route }) => {
     getInfoMovie(imdbID).then(async (result)=>{
       onHandleChange.isLoading(false);
       onHandleChange.isFavorite(await checkFavorite(`${imdbID}`));
-      // console.log('check',checkFavorite(`${imdbID}`))
     }).catch((error)=>{console.log(error)})
-  }, []);
-
-  useEffect(()=>{
-    console.log('fav',state)
-  },[state])
+  }, [imdbID]);
 
   const change=(favorite)=>{
-    console.log('aqui',favorite)
     onHandleChange.isFavorite(favorite);
   }
 
@@ -51,7 +45,7 @@ const MovieScreen = ({ route }) => {
             <ButtonStyled onPress={()=>toogleFavorite(infoMovie,isFavorite,change)}>
               <MaterialIcons name={(isFavorite)?"favorite":"favorite-outline"} size={24} color="white" />
             </ButtonStyled>
-            <ShareButton message={infoMovie.Title}>
+            <ShareButton message={message(infoMovie.Title,infoMovie.Plot)}>
               <Entypo name="share" size={24} color="white"/>
             </ShareButton>
             
@@ -78,3 +72,5 @@ const MovieScreen = ({ route }) => {
 }
 
 export default React.memo(MovieScreen);
+
+const message=(title,plot)=>(`Do you have watched ${title}? that's about a ${plot}`)

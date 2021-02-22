@@ -17,11 +17,13 @@ const FavoriteScreen: React.FC<HomeProps> = ({ navigation }) => {
     textSearch
   } = favoriteMoviesContext;
 
-
   useEffect(()=>{
     reloadList();
-    console.log('a')
   },[])
+
+  useEffect(()=>{
+    if(textSearch.length==0) searchMoviesFavorite()
+  },[textSearch])
 
   return (
     <HomeContainer>

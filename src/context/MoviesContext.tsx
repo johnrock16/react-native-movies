@@ -25,12 +25,13 @@ export const MoviesContextProvider=({children})=>{
 
   const searchMovies=async (message=false,forced=true)=>{
     if(verifySearch(textSearch,message)){
-        searchAPI('', { s: textSearch}).then((search) => {
-          if (search?.result && search.result?.Search) {
-            onHandleChange.ListMovies(search.result?.Search);
-          }
-          else if(search?.error) alert(`${search.error}`)
-        });
+      searchAPI('', { s: textSearch}).then((search) => {
+        console.log(search)
+        if (search.result && search.result?.Search) {
+          onHandleChange.ListMovies(search.result.Search);
+        }
+        else if(search.result?.Error) alert(`${search.result.Error}`)
+      });
     }
   }
 

@@ -44,7 +44,6 @@ export const FavoriteMoviesContextProvider=({children})=>{
 
   const checkFavorite= async (imdbID:string)=>{
     const result= await getItemCache('favoriteMoviesIndexes',true);
-    console.log('aqui',result)
     if(result && Array.isArray(result)){
       return result.indexOf(imdbID)>-1;
     }

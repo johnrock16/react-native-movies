@@ -20,7 +20,7 @@ export default MovieTabs;
 
 const screenOptions=({ route }) => ({
     tabBarIcon: ({ focused, color, size }) => {
-      const iconName = (route.name === 'Home') ? 'ios-list' : 'ios-add-circle-outline';
+      const iconName = (route.name === 'Home') ? 'ios-list' : 'star-outline';
       color = focused? 'red' : 'black'
       return <Ionicons name={iconName} size={size} color={color} />;
     },
